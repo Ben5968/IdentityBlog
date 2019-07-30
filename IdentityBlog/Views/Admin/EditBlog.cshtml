@@ -1,0 +1,45 @@
+﻿
+@model Blog.ViewModels.BlogViewModel
+
+@{
+    ViewBag.Title = "EditBlog";
+    Layout = "~/Views/Shared/_SecondLayout.cshtml";
+}
+
+<h2>Edit Blog</h2>
+<form action="/Admin/EditBlog/" method="post" enctype="multipart/form-data">
+
+
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="form-group">
+        <label for="Title">Title</label>
+        <input type="text" class="form-control" name="Title" value="@Model.Title">
+    </div>
+
+    <div class="form-group">
+        <label for="Content">Content</label>
+        <textarea class="form-control" name="Content" id="content">@Model.Content</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="Photo">Photo</label>
+        @if (@Model.Photo != null)
+        {
+        <br />
+            <img alt="BlogPhoto" src="~/Content/Upload/Photos/@Model.Photo" class="img-thumbnail" style="max-height:100px">
+        }
+    </div>
+    <div class="form-group">
+        <label for="photoFile">Choose Photo</label>
+        <input type="file" class="form-control-file" name="photoFile" value="Submit">
+    </div>
+
+    <div class="form-group">
+        <input type="submit" name="Submit" class="btn btn-primary" value="Submit" />
+        <a href="/Admin" class="btn btn-success" role="button">Back</a>
+    </div>
+
+</form>
+
+

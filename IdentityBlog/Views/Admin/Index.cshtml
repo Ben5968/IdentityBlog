@@ -1,0 +1,64 @@
+﻿@model IList<Blog.ViewModels.BlogViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SecondLayout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row"><h2>Blogs</h2></div>
+    <br />
+    <div class="row">
+        <a href="/Admin/Create" class="btn btn-success" role="button">Add New Blog</a>
+
+      
+    </div>
+    <hr />
+    
+    <div class="row">
+
+        <table class="table table-bordered table-hover table-sm">
+            <thead class="thead-light">
+                <tr>
+                    <th style="width: 5%">Id</th>
+                    <th style="width: 25%">Title</th>
+                    <th style="width: 45%">Content</th>
+                    <th style="width: 10%">Image</th>
+                    <th style="width: 15%"></th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Title</td>
+                    <td>@item.Content</td>
+                    <td>
+                        @if (@item.Photo != null)
+                        {
+                            <img alt="BlogPhoto" src="~/Content/Upload/Photos/@item.Photo" class="img-thumbnail" style="height:30px">
+                        }
+                    </td>
+                    <td>
+                        <a class="badge badge-primary" href="/Admin/EditBlog/@item.Id">Edit</a> | <a class="badge badge-danger" href="/Admin/DeleteBlog/@item.Id"
+                                                                                                     onclick="return checkDelete()">Delete</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<script>
+    function checkDelete() {
+        var result = confirm("Do you want to delete the record");
+        if (result) {
+            return true;
+        }
+        return false;
+    }
+
+</script>
+
